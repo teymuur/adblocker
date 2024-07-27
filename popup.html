@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ad Blocker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      width: 200px;
+    }
+    h1 {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+    }
+    #status {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    #toggle {
+      margin-left: 10px;
+    }
+    #counter {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ad Blocker</h1>
+  <div id="status">
+    <label for="toggle">Enabled:</label>
+    <input type="checkbox" id="toggle">
+  </div>
+  <div id="counter">
+    Ads Blocked: <span id="blocked-count">0</span>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
