@@ -20,7 +20,13 @@ function removeAds() {
   }
 
   // Send message to background script about removed ads
-  chrome.runtime.sendMessage({ type: 'adsRemoved', count: removedCount });
+  chrome.runtime.sendMessage({ type: 'adsRemoved', count: removedCount },response => {
+    if (response && response.success) {
+      console.log('Ad blocker removed');
+    } else {
+      console.error('Failed');
+    }
+  });
 }
 
 // Initial ad removal on DOMContentLoaded

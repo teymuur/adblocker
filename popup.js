@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
-  if (typeof chrome !== 'undefined' && chrome.storage) {
- 
-
     const toggle = document.getElementById('toggle');
     const blockedCount = document.getElementById('blocked-count');
   
@@ -15,7 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Toggle the ad blocker on/off
     toggle.addEventListener('change', function () {
       const enabled = toggle.checked;
-      chrome.runtime.sendMessage({ type: 'toggleEnabled', enabled: enabled });
+      try {
+        chrome.runtime.sendMessage({ type: 'toggleEnabled', enabled: enabled }, response => {
+          if (response && response.success) {
+            console.log('Ad blocker toggled successfully');
+          } else {
+            console.error('Failed to toggle ad blocker');
+          }
+        });
+      } catch (error) {
+        console.error('Failed to send toggleEnabled message:', error);
+      }
     });
   
     // Listen for messages from the background script to update the stats
@@ -25,8 +31,4 @@ document.addEventListener('DOMContentLoaded', function () {
         toggle.checked = message.isEnabled;
       }
     });
-    
-}else {
-    console.error('Chrome storage API not available');
-  }
   });
