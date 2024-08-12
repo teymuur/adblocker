@@ -1,19 +1,19 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Ad Blocker",
   "version": "1.0",
   "description": "Blocks ads on websites.",
   "permissions": [
-    "webRequest",
-    "webRequestBlocking",
     "storage",
-    "http://*/",
-    "https://*/",
-    "management"
+    "declarativeNetRequest"
   ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  
   "background": {
-    "scripts": ["background.js"],
-    "persistent": true
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -21,9 +21,7 @@
       "js": ["content.js"]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
-   
   }
-
 }
